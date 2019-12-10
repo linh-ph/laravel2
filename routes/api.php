@@ -1,21 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+Route::post('dang-nhap', 'API\NguoiChoiController@dangNhap');
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['gan.guard:api', 'jwt.auth'])->group(function(){
+    Route::get('thong-tin', 'API\NguoiChoiController@layThongTin');
+    //
+    //Route::post('quen-mat-khau', 'API\QuenMatKhauController@quenMatKhau');
 });
-
-Route::get('linh-vuc','API\LinhvucController@laydanhsach');
